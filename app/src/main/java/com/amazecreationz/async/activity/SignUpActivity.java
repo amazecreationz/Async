@@ -153,6 +153,7 @@ public class SignUpActivity extends AppCompatActivity {
                             }
                             progressDialog.dismiss();
                             Intent intent = new Intent(getApplicationContext(), MessageActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             intent.putExtra(getString(R.string.message_code), getString(R.string.user_just_signup_code));
                             startActivity(intent);
                             finish();
