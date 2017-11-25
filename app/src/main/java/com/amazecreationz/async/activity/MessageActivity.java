@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.amazecreationz.async.R;
+import com.amazecreationz.async.models.User;
+import com.amazecreationz.async.services.FirebaseService;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -47,12 +49,18 @@ public class MessageActivity extends AppCompatActivity {
                 progressDialog.show();
                 FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
                 FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+                final User user = new User(getApplicationContext());
+                user.setUser(firebaseUser);
                 if(firebaseUser != null) {
                     firebaseUser.reload().addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if(FirebaseAuth.getInstance().getCurrentUser().isEmailVerified()) {
                                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                user.setIsUserVerified(true);
+                                FirebaseService firebaseService = FirebaseService.getInstance();
+                                firebaseService.setUserData(user);
+                                firebaseService.setDeviceInfo(user);
                                 progressDialog.dismiss();
                                 startActivity(intent);
                                 finish();

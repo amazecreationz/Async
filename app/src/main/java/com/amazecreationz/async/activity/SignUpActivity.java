@@ -135,18 +135,18 @@ public class SignUpActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Log.d(TAG, "createUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
+                            FirebaseUser firebaseUser = mAuth.getCurrentUser();
                             UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                                     .setDisplayName(name).build();
-                            if (user != null) {
-                                user.sendEmailVerification();
-                                user.updateProfile(profileUpdates)
+                            if (firebaseUser != null) {
+                                firebaseUser.sendEmailVerification();
+                                firebaseUser.updateProfile(profileUpdates)
                                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 if (task.isSuccessful()) {
-                                                    new User(getApplicationContext())
-                                                            .setUser(FirebaseAuth.getInstance().getCurrentUser());
+                                                    User user = new User(getApplicationContext());
+                                                    user.setUser(FirebaseAuth.getInstance().getCurrentUser());
                                                 }
                                             }
                                         });

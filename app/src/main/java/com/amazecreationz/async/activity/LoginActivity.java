@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.amazecreationz.async.R;
 import com.amazecreationz.async.models.User;
+import com.amazecreationz.async.services.FirebaseService;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -37,6 +38,7 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d("CHECKKKK", "here");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         progressDialog = new ProgressDialog(this);
@@ -138,9 +140,18 @@ public class LoginActivity extends AppCompatActivity {
                             Context context = getApplicationContext();
                             FirebaseUser firebaseUser = mAuth.getCurrentUser();
                             if(firebaseUser != null) {
-                                new User(context).setUser(firebaseUser);
-                                Intent intent = new Intent(context, firebaseUser.isEmailVerified() ? MainActivity.class : MessageActivity.class);
-                                intent.putExtra(getString(R.string.message_code), getString(R.string.user_not_verified_code));
+                                Intent intent;
+                                if(firebaseUser.isEmailVerified()) {
+                                    User user = new User(context);
+                                    user.setUser(firebaseUser);
+                                    FirebaseService firebaseService = FirebaseService.getInstance();
+                                    firebaseService.setUserData(user);
+                                    firebaseService.setDeviceInfo(user);
+                                    intent = new Intent(context, MainActivity.class);
+                                } else {
+                                    intent = new Intent(context, MessageActivity.class);
+                                    intent.putExtra(getString(R.string.message_code), getString(R.string.user_not_verified_code));
+                                }
                                 progressDialog.dismiss();
                                 startActivity(intent);
                                 finish();

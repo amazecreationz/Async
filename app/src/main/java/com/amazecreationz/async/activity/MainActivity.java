@@ -2,6 +2,8 @@ package com.amazecreationz.async.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -27,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
+        AppBarLayout.LayoutParams params = (AppBarLayout.LayoutParams) toolbar.getLayoutParams();
+        params.setScrollFlags(0);
         setSupportActionBar(toolbar);
 
         SectionsPagerAdapter mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -36,6 +40,15 @@ public class MainActivity extends AppCompatActivity {
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
         mViewPager.setAdapter(mSectionsPagerAdapter);
+
+        FirebaseAuth.getInstance().addAuthStateListener(new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                if (firebaseAuth.getCurrentUser() == null) {
+                    signOut();
+                }
+            }
+        });
     }
 
     @Override
@@ -49,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.action_sign_out) {
+            FirebaseAuth.getInstance().signOut();
             signOut();
             return true;
         }
@@ -58,30 +72,23 @@ public class MainActivity extends AppCompatActivity {
 
     private void signOut() {
         new User(this).deleteUser();
-        FirebaseAuth.getInstance().signOut();
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
         finish();
     }
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
-        private HomeFragment homeFragment;
-        private LogFragment logFragment;
-        private ProfileFragment profileFragment;
 
         SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
-            homeFragment = HomeFragment.newInstance("hello", "there");
-            logFragment = LogFragment.newInstance("hello", "log");
-            profileFragment = ProfileFragment.newInstance("profile", "fragment");
         }
 
         @Override
         public Fragment getItem(int position) {
             switch (position) {
-                case 1:return logFragment;
-                case 2:return profileFragment;
-                default: return homeFragment;
+                case 1: return LogFragment.newInstance("hello", "log");
+                case 2: return ProfileFragment.newInstance("profile", "fragment");
+                default: return HomeFragment.newInstance("hello", "there");
             }
         }
 
