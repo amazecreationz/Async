@@ -12,10 +12,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by anandmoghan on 24/11/17.
- */
-
 public class FirebaseService implements FirebaseConstants {
     private FirebaseFirestore dB;
     private DocumentReference asyncRef;
@@ -43,5 +39,10 @@ public class FirebaseService implements FirebaseConstants {
         device.put(DEVICE_PRODUCT, Build.PRODUCT);
         device.put(DATE_ADDED, new Date().getTime());
         getDevicesRef(user).document(user.getDeviceID()).set(device);
+    }
+
+    public void setData(User user) {
+        setUserData(user);
+        setDeviceInfo(user);
     }
 }

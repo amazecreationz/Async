@@ -30,23 +30,13 @@ import java.util.Locale;
 
 public class ProfileFragment extends Fragment implements FirebaseConstants {
 
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-    private User user;
-
-    public static ProfileFragment newInstance(String param1, String param2) {
-        ProfileFragment fragment = new ProfileFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    public static ProfileFragment newInstance() {
+        return new ProfileFragment();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        user = new User(getContext());
     }
 
     @Override
@@ -64,14 +54,15 @@ public class ProfileFragment extends Fragment implements FirebaseConstants {
                 }
             }
         });
+        User user = new User(getContext());
         TextView nameView = view.findViewById(R.id.user_name);
-        nameView.setText(user.getName());
         TextView emailView = view.findViewById(R.id.user_email);
+        nameView.setText(user.getName());
         emailView.setText(user.getEmail());
         final ProgressBar progressBar = view.findViewById(R.id.device_pbar);
         final TextView noDevicesText = view.findViewById(R.id.no_devices);
         final RecyclerView devicesList = view.findViewById(R.id.devices_list);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+        final RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         devicesList.setLayoutManager(mLayoutManager);
         devicesList.setNestedScrollingEnabled(false);
         FirebaseService firebaseService = FirebaseService.getInstance();

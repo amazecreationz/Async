@@ -45,7 +45,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="24dp"
                     android:layout_below="@id/user_image"
-                    android:text="@string/prompt_name"
+                    android:text="@string/name"
                     android:textAlignment="center"
                     android:textSize="20sp" />
 
@@ -54,7 +54,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="20dp"
                     android:layout_below="@id/user_name"
-                    android:text="@string/prompt_email"
+                    android:text="@string/email"
                     android:textAlignment="center"
                     android:textSize="14sp" />
 

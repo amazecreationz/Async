@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
         mViewPager.setAdapter(mSectionsPagerAdapter);
+        mViewPager.setOffscreenPageLimit(3);
 
         FirebaseAuth.getInstance().addAuthStateListener(new FirebaseAuth.AuthStateListener() {
             @Override
@@ -60,19 +61,18 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-
         if (id == R.id.action_sign_out) {
             FirebaseAuth.getInstance().signOut();
             signOut();
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
     private void signOut() {
         new User(this).deleteUser();
-        Intent intent = new Intent(this, LoginActivity.class);
+        Intent intent = new Intent(this, SetupActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         finish();
     }
@@ -86,9 +86,9 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public Fragment getItem(int position) {
             switch (position) {
-                case 1: return LogFragment.newInstance("hello", "log");
-                case 2: return ProfileFragment.newInstance("profile", "fragment");
-                default: return HomeFragment.newInstance("hello", "there");
+                case 1: return LogFragment.newInstance();
+                case 2: return ProfileFragment.newInstance();
+                default: return HomeFragment.newInstance();
             }
         }
 

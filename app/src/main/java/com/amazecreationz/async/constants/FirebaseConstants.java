@@ -11,9 +11,12 @@ public interface FirebaseConstants {
     String DATA_REF = "DATA";
     String DEVICES_REF = "DEVICES";
 
-    String DESC = "desc";
+    String MSG_CODE = "MSG_CODE";
+    String USER_NOT_VERIFIED = "USER_NOT_VERIFIED";
 
-    String DEVICE_ID = "dID";
+    String TOKEN = "token";
+    String TOKEN_VALUE = "value";
+
     String DEVICE_TYPE = "t";
     String DEVICE_MODEL = "m";
     String DEVICE_BRAND = "b";
@@ -21,4 +24,6 @@ public interface FirebaseConstants {
     String DATE_ADDED = "aD";
 
     String ANDROID = "Android";
+
+    String CREATE_CUSTOM_TOKEN_URL = "https://us-central1-amazecreationz-web.cloudfunctions.net/createCustomToken?authToken=";
 }

@@ -2,33 +2,20 @@
     <string name="app_name">Async</string>
     <string name="amazecreationz">Amaze Creationz</string>
 
-    <string name="message_code">MSG_CODE</string>
-    <string name="user_not_verified_code">USER_NOT_VERIFIED</string>
-    <string name="user_just_signup_code">USER_TO_BE_VERIFIED</string>
     <string name="user_not_verified_msg">Verify your email to continue.</string>
     <string name="check_verify">Check Verification</string>
     <string name="resend_verify">Resend Verification Mail</string>
 
 
     <!-- Strings related to login -->
-    <string name="prompt_name">Name</string>
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign In</string>
-    <string name="action_sign_up">Sign Up</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="error_invalid_email">This email address is invalid</string>
-    <string name="error_invalid_password">This password is too short</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_field_required">This field is required</string>
-
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="login">Login with Amaze Creationz</string>
     <string name="login_dialog_msg">Signing in…</string>
-    <string name="signup_dialog_msg">Signing Up…</string>
+    <string name="validate_dialog_msg">Validating User…</string>
     <string name="check_dialog_msg">Checking…</string>
     <string name="send_dialog_msg">Sending…</string>
-    <string name="action_new_user">New User? Sign Up</string>
     <string name="action_sign_out">Sign Out</string>
-    <string name="verify_failed">Failed to verify.</string>
 
 
     <string name="main_tab_1">Home</string>

@@ -16,5 +16,8 @@ public interface AppConstants {
     String F_UEMAIL = "e";
     String F_UPURL = "pURL";
 
-
+    String VERIFY_SUCCESS = "Verification Success!";
+    String VERIFY_FAILED = "Verification Failed!";
+    String RESEND_VERIFY_SUCCESS = "Verification mail resend successfully.";
+    String RESEND_VERIFY_FAILED = "Failed to resend verification mail";
 }

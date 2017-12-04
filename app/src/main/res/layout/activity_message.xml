@@ -12,7 +12,5 @@
         android:paddingTop="20sp"
         android:text="@string/user_not_verified_msg"
         android:textAlignment="center"
-        android:textSize="18sp"
-        tools:layout_editor_absoluteX="61dp"
-        tools:layout_editor_absoluteY="103dp" />
+        android:textSize="18sp" />
 </LinearLayout>
